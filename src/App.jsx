@@ -1,17 +1,38 @@
+import axios from 'axios';
 import React, { useRef } from 'react';
 import { Form } from 'react-bootstrap';
 import './index.css';
 
+const API_URL = 'https://api.unsplash.com/search/photos';
+const IMAGES_PER_PAGE = 20;
+
 const App = () => {
   const searchInput = useRef(null);
+
+  const fetchImages = async () => {
+    try {
+      const { data } = await axios.get(
+        `${API_URL}?query=${
+          searchInput.current.value
+        }&page=1&per_page=${IMAGES_PER_PAGE}&client_id=${
+          import.meta.env.VITE_API_KEY
+        }`
+      );
+      console.log('data', data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSearch = (event) => {
     event.preventDefault();
     console.log(searchInput.current.value);
+    fetchImages();
   };
 
   const handleSelection = (selection) => {
     searchInput.current.value = selection;
+    fetchImages();
   };
 
   return (
@@ -28,11 +49,11 @@ const App = () => {
         </Form>
       </div>
       <div className='filters'>
-   <div onClick={() => handleSelection('nature')}>Nature</div>
-   <div onClick={() => handleSelection('birds')}>Birds</div>
-   <div onClick={() => handleSelection('cats')}>Cats</div>
-   <div onClick={() => handleSelection('shoes')}>Shoes</div>
-</div>
+        <div onClick={() => handleSelection('nature')}>Nature</div>
+        <div onClick={() => handleSelection('birds')}>Birds</div>
+        <div onClick={() => handleSelection('cats')}>Cats</div>
+        <div onClick={() => handleSelection('shoes')}>Shoes</div>
+      </div>
     </div>
   );
 };
