@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import './index.css';
 
 const API_URL = 'https://api.unsplash.com/search/photos';
@@ -16,7 +17,7 @@ const App = () => {
       const { data } = await axios.get(
         `${API_URL}?query=${
           searchInput.current.value
-        }&page=1&per_page=${IMAGES_PER_PAGE}&client_id=${
+        }&page=${page}&per_page=${IMAGES_PER_PAGE}&client_id=${
           import.meta.env.VITE_API_KEY
         }`
       );
@@ -38,6 +39,8 @@ const App = () => {
     searchInput.current.value = selection;
     fetchImages();
   };
+
+  const [page, setPage] = useState(1);
 
   return (
     <div className='container'>
@@ -67,6 +70,10 @@ const App = () => {
               className='image'
             />
         ))}
+    </div>
+    <div className='buttons'>
+          {page > 1 && <Button>Previous</Button>}
+          {page < totalPages && <Button>Next</Button>}
     </div>
     </div>
   );
