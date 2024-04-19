@@ -59,17 +59,15 @@ const App = () => {
         <div onClick={() => handleSelection('shoes')}>Shoes</div>
       </div>
       <div className='images'>
-  {images.map((image) => {
-    return (
-      <img
-        key={image.id}
-        src={image.urls.small}
-        alt={image.alt_description}
-        className='image'
-      />
-    );
-  })}
-</div>
+        {images.map((image) => (
+            <img
+              key={image.id}
+              src={image.urls.small}
+              alt={image.alt_description}
+              className='image'
+            />
+        ))}
+    </div>
     </div>
   );
 };
