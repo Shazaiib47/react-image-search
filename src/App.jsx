@@ -11,6 +11,10 @@ const App = () => {
   const [images, setImages] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    fetchImages();
+  }, [page]);
   
   const fetchImages = async () => {
     try {
