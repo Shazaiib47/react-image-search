@@ -1,7 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
-import { Form } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { useEffect, useRef, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import './index.css';
 
 const API_URL = 'https://api.unsplash.com/search/photos';
@@ -11,6 +10,8 @@ const App = () => {
   const searchInput = useRef(null);
   const [images, setImages] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
+
+  
 
   const fetchImages = async () => {
     try {
