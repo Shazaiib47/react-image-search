@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import './index.css';
 
@@ -10,9 +10,7 @@ const App = () => {
   const searchInput = useRef(null);
   const [images, setImages] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
-
   
-
   const fetchImages = async () => {
     try {
       const { data } = await axios.get(
