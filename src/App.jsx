@@ -33,15 +33,22 @@ const App = () => {
     }
   };
 
+  const resetSearch = () => {
+    setPage(1);
+    fetchImages(1);
+  }
+
   const handleSearch = (event) => {
     event.preventDefault();
     console.log(searchInput.current.value);
     fetchImages();
+    resetSearch();
   };
 
   const handleSelection = (selection) => {
     searchInput.current.value = selection;
     fetchImages();
+    resetSearch();
     console.log('page', page);
   };
 
